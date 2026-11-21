@@ -87,14 +87,13 @@
       background: rgba(255,255,255,0.05);
     }
     .hero-avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid rgba(255, 255, 255, 0.6);
-      object-fit: cover;          /* crops to fill the circle */
-      object-position: top center; /* shows the top (face area) of your portrait */
-      display: block;
+      width: 120px; height: 120px; border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 4px solid rgba(255,255,255,0.6);
+      display: flex; align-items: center; justify-content: center;
       margin: 0 auto 24px;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 2.8rem; font-weight: 700; color: #fff;
     }
     .hero-name {
       font-family: 'Google Sans', sans-serif;
@@ -340,37 +339,93 @@
     .skill-name { font-size: 0.9rem; font-weight: 500; }
 
     /* ===== Certifications ===== */
+    .cert-section-label {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--text-secondary);
+      margin: 32px 0 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .cert-section-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--divider);
+    }
+    .cert-section-label:first-of-type { margin-top: 0; }
+
     .cert-card {
       display: flex; gap: 20px; align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .25s, transform .25s;
+      margin-bottom: 14px;
     }
+    .cert-card:last-child { margin-bottom: 0; }
+    .cert-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+
     .cert-logo {
       width: 56px; height: 56px; border-radius: 12px;
-      background: linear-gradient(135deg, #f04a2a, #c74634);
       display: flex; align-items: center; justify-content: center;
       font-family: 'Google Sans', sans-serif;
-      font-size: 0.75rem; font-weight: 700; color: #fff;
-      flex-shrink: 0; text-align: center; line-height: 1.2;
+      font-size: 0.72rem; font-weight: 700; color: #fff;
+      flex-shrink: 0; text-align: center; line-height: 1.3;
     }
-    .cert-body { flex: 1; }
+    .cert-logo.oracle { background: linear-gradient(135deg, #f04a2a, #c74634); }
+    .cert-logo.nptel  { background: linear-gradient(135deg, #1a73e8, #0d47a1); }
+
+    .cert-body { flex: 1; min-width: 0; }
     .cert-name {
       font-family: 'Google Sans', sans-serif;
-      font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 3px;
     }
-    .cert-org { font-size: 0.85rem; color: var(--primary); font-weight: 500; }
-    .cert-date { font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px; }
+    .cert-org  { font-size: 0.82rem; color: var(--primary); font-weight: 500; }
+    .cert-meta {
+      font-size: 0.78rem; color: var(--text-secondary);
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px;
+    }
+    .cert-meta span { display: inline-flex; align-items: center; gap: 4px; }
     .cert-id {
-      font-size: 0.75rem; color: var(--text-secondary);
+      font-size: 0.72rem; color: var(--text-secondary);
       font-family: monospace; margin-top: 4px;
+      word-break: break-all;
     }
+    .cert-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+
+    /* Grade badges */
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.72rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 10px;
+    }
+    .badge.elite-silver { background: linear-gradient(90deg,#e8f0fe,#f1f3f4); color: #1a73e8; border: 1px solid #c5cae9; }
+    .badge.elite        { background: #e8f0fe; color: #1a73e8; }
+    .badge.completed    { background: #e6f4ea; color: #137333; }
+    .badge.score        { background: #fef7e0; color: #b05a00; }
+    .badge.fdp          { background: #fce8e6; color: #c5221f; }
+
+    .cert-actions { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
     .cert-verify {
-      display: inline-flex; align-items: center; gap: 6px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
       background: var(--primary); color: #fff;
-      font-size: 0.8rem; font-weight: 500;
-      padding: 8px 18px; border-radius: 20px;
+      font-size: 0.78rem; font-weight: 500;
+      padding: 8px 16px; border-radius: 20px;
       transition: background .2s, transform .2s;
-      white-space: nowrap;
+      white-space: nowrap; text-align: center;
     }
     .cert-verify:hover { background: var(--primary-dark); transform: scale(1.03); text-decoration: none; }
+    .cert-verify.secondary {
+      background: transparent; color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    .cert-verify.secondary:hover { background: var(--primary-light); transform: scale(1.03); }
+
+    @media (max-width: 767px) {
+      .cert-card { flex-direction: column; align-items: flex-start; gap: 14px; padding: 16px; }
+      .cert-actions { flex-direction: row; flex-wrap: wrap; width: 100%; }
+      .cert-verify { flex: 1; min-width: 120px; }
+    }
 
     /* ===== Contact ===== */
     #contact {
@@ -541,7 +596,7 @@
 
 <!-- ==================== NAV ==================== -->
 <nav>
-  <div class="nav-logo">JD<span>.</span></div>
+  <div class="nav-logo">DJ<span>.</span></div>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -557,7 +612,7 @@
 
 <!-- ==================== HERO ==================== -->
 <section id="hero">
-  <img src="Dhyaneswaran_J.jpg" alt="Dhyaneswaran Jagadeesan" class="hero-avatar" />
+  <div class="hero-avatar">DJ</div>
   <div class="hero-name">Dhyaneswaran Jagadeesan</div>
   <div class="hero-title">Assistant Professor &nbsp;·&nbsp; Ex Retail Sales &nbsp;·&nbsp; IBM Alumni</div>
   <div class="hero-location">
@@ -568,7 +623,7 @@
     <span class="hero-badge">🎓 10+ Years Teaching</span>
     <span class="hero-badge">💻 Oracle AI Certified</span>
     <span class="hero-badge">🏢 IBM Alumni</span>
-    <span class="hero-badge">🔐 Network Security</span>
+    <span class="hero-badge">🤖 Machine Learning</span>
     <span class="hero-badge">☕ Core Java</span>
   </div>
   <div class="hero-contact">
@@ -921,20 +976,206 @@
       <div class="section-icon"><span class="material-icons">verified</span></div>
       <h2>Licenses &amp; Certifications</h2>
     </div>
-    <div class="card cert-card">
-      <div class="cert-logo">OCI<br>AI</div>
+
+    <!-- ── Oracle ── -->
+    <div class="cert-section-label">Oracle</div>
+
+    <div class="cert-card">
+      <div class="cert-logo oracle">OCI<br>AI</div>
       <div class="cert-body">
         <div class="cert-name">Oracle Cloud Infrastructure 2024 Generative AI Professional</div>
         <div class="cert-org">Oracle</div>
-        <div class="cert-date">Issued: July 2024</div>
+        <div class="cert-meta">
+          <span><span class="material-icons" style="font-size:13px;">calendar_today</span>Issued Jul 2024</span>
+        </div>
         <div class="cert-id">ID: 225653731OCI2024GAIOCP</div>
       </div>
-      <a class="cert-verify"
-         href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C042B3844E1B78C6285BA9F2DA9EA2D3A9C0DC2184A63831E4592E8AB3F778F1"
-         target="_blank">
-        <span class="material-icons" style="font-size:16px;">verified</span>Verify
-      </a>
+      <div class="cert-actions">
+        <a class="cert-verify"
+           href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C042B3844E1B78C6285BA9F2DA9EA2D3A9C0DC2184A63831E4592E8AB3F778F1"
+           target="_blank">
+          <span class="material-icons" style="font-size:15px;">verified</span>Verify
+        </a>
+      </div>
     </div>
+
+    <!-- ── NPTEL ── -->
+    <div class="cert-section-label">NPTEL · IIT / IISc / IIIT</div>
+
+    <!-- 1. Cyber Security and Privacy -->
+    <div class="cert-card">
+      <div class="cert-logo nptel">NPTEL<br>CS</div>
+      <div class="cert-body">
+        <div class="cert-name">Cyber Security and Privacy</div>
+        <div class="cert-org">IIT Madras &nbsp;·&nbsp; NPTEL</div>
+        <div class="cert-meta">
+          <span><span class="material-icons" style="font-size:13px;">calendar_today</span>Jul – Oct 2026 · 12 Weeks</span>
+          <span><span class="material-icons" style="font-size:13px;">school</span>4 Credits</span>
+          <span><span class="material-icons" style="font-size:13px;">group</span>20,949 candidates</span>
+        </div>
+        <div class="cert-badges">
+          <span class="badge elite-silver">🥈 Elite + Silver</span>
+          <span class="badge score">📊 79% (Exam: 54/75)</span>
+          <span class="badge fdp">🏫 AICTE FDP</span>
+        </div>
+        <div class="cert-id">Roll: NPTEL26CS144S1285704012</div>
+      </div>
+      <div class="cert-actions">
+        <a class="cert-verify"
+           href="https://beta.nptel.ac.in/certificates/download/NOC-M6BZ-F5YW-C0M7V/"
+           target="_blank">
+          <span class="material-icons" style="font-size:15px;">verified</span>Certificate
+        </a>
+        <a class="cert-verify secondary"
+           href="https://beta.nptel.ac.in/certificates/download/FDP-016D-899F-QGGB7/"
+           target="_blank">
+          <span class="material-icons" style="font-size:15px;">school</span>FDP Cert
+        </a>
+      </div>
+    </div>
+
+    <!-- 2. Ethical Hacking -->
+    <div class="cert-card">
+      <div class="cert-logo nptel">NPTEL<br>EH</div>
+      <div class="cert-body">
+        <div class="cert-name">Ethical Hacking</div>
+        <div class="cert-org">IIT Kharagpur &nbsp;·&nbsp; NPTEL</div>
+        <div class="cert-meta">
+          <span><span class="material-icons" style="font-size:13px;">calendar_today</span>Jul – Oct 2025 · 12 Weeks</span>
+          <span><span class="material-icons" style="font-size:13px;">school</span>3–4 Credits</span>
+          <span><span class="material-icons" style="font-size:13px;">group</span>8,443 certified</span>
+        </div>
+        <div class="cert-badges">
+          <span class="badge elite-silver">🥈 Elite + Silver</span>
+          <span class="badge score">📊 82% (Exam: 57.75/75)</span>
+          <span class="badge fdp">🏫 AICTE FDP</span>
+        </div>
+        <div class="cert-id">Roll: NPTEL25CS142S866300235</div>
+      </div>
+      <div class="cert-actions">
+        <a class="cert-verify"
+           href="https://nptel.ac.in/noc/E_Certificate/NPTEL25CS142S86630023510466605"
+           target="_blank">
+          <span class="material-icons" style="font-size:15px;">verified</span>Certificate
+        </a>
+        <a class="cert-verify secondary"
+           href="https://nptel.ac.in/noc/E_Certificate/FDP25CS142S86630023510466605"
+           target="_blank">
+          <span class="material-icons" style="font-size:15px;">school</span>FDP Cert
+        </a>
+      </div>
+    </div>
+
+    <!-- 3. Teaching And Learning in Engineering -->
+    <div class="cert-card">
+      <div class="cert-logo nptel">NPTEL<br>TALE</div>
+      <div class="cert-body">
+        <div class="cert-name">Teaching and Learning in Engineering (TALE)</div>
+        <div class="cert-org">IISc Bangalore &nbsp;·&nbsp; NPTEL</div>
+        <div class="cert-meta">
+          <span><span class="material-icons" style="font-size:13px;">calendar_today</span>Feb – Mar 2019 · 4 Weeks</span>
+          <span><span class="material-icons" style="font-size:13px;">school</span>1 Credit</span>
+          <span><span class="material-icons" style="font-size:13px;">group</span>1,584 certified</span>
+        </div>
+        <div class="cert-badges">
+          <span class="badge elite-silver">🥈 Elite + Silver</span>
+          <span class="badge score">📊 78% (Exam: 57/75)</span>
+          <span class="badge fdp">🏫 AICTE FDP</span>
+        </div>
+        <div class="cert-id">Roll: NPTEL19GE04S31241591</div>
+      </div>
+      <div class="cert-actions">
+        <a class="cert-verify"
+           href="https://nptel.ac.in/noc/E_Certificate/NPTEL19GE04S31241591191035703"
+           target="_blank">
+          <span class="material-icons" style="font-size:15px;">verified</span>Verify
+        </a>
+      </div>
+    </div>
+
+    <!-- 4. Programming, Data Structures And Algorithms Using Python -->
+    <div class="cert-card">
+      <div class="cert-logo nptel">NPTEL<br>PY</div>
+      <div class="cert-body">
+        <div class="cert-name">Programming, Data Structures and Algorithms Using Python</div>
+        <div class="cert-org">IIT Madras &nbsp;·&nbsp; NPTEL</div>
+        <div class="cert-meta">
+          <span><span class="material-icons" style="font-size:13px;">calendar_today</span>Feb – Mar 2018 · 8 Weeks</span>
+          <span><span class="material-icons" style="font-size:13px;">school</span>2 Credits</span>
+          <span><span class="material-icons" style="font-size:13px;">group</span>3,396 certified</span>
+        </div>
+        <div class="cert-badges">
+          <span class="badge elite">⭐ Elite</span>
+          <span class="badge score">📊 71% (Assignments: 25/25)</span>
+        </div>
+        <div class="cert-id">Roll: NPTEL18CS21S4281549</div>
+      </div>
+      <div class="cert-actions">
+        <a class="cert-verify"
+           href="https://nptel.ac.in/noc/E_Certificate/NPTEL18CS21S42815491810063453"
+           target="_blank">
+          <span class="material-icons" style="font-size:15px;">verified</span>Verify
+        </a>
+      </div>
+    </div>
+
+    <!-- 5. Software Testing -->
+    <div class="cert-card">
+      <div class="cert-logo nptel">NPTEL<br>ST</div>
+      <div class="cert-body">
+        <div class="cert-name">Software Testing</div>
+        <div class="cert-org">IIIT Bangalore &nbsp;·&nbsp; NPTEL</div>
+        <div class="cert-meta">
+          <span><span class="material-icons" style="font-size:13px;">calendar_today</span>Jul – Oct 2024 · 12 Weeks</span>
+        </div>
+        <div class="cert-badges">
+          <span class="badge completed">✅ Successfully Completed</span>
+          <span class="badge score">📊 52%</span>
+          <span class="badge fdp">🏫 AICTE FDP</span>
+        </div>
+        <div class="cert-id">Roll: NPTEL24CS91S458900674</div>
+      </div>
+      <div class="cert-actions">
+        <a class="cert-verify"
+           href="https://nptel.ac.in/noc/E_Certificate/NPTEL24CS91S45890067404002410"
+           target="_blank">
+          <span class="material-icons" style="font-size:15px;">verified</span>Certificate
+        </a>
+        <a class="cert-verify secondary"
+           href="https://nptel.ac.in/noc/E_Certificate/FDP24CS91S45890067404002410"
+           target="_blank">
+          <span class="material-icons" style="font-size:15px;">school</span>FDP Cert
+        </a>
+      </div>
+    </div>
+
+    <!-- 6. Blockchain Architecture Design and Use Cases -->
+    <div class="cert-card">
+      <div class="cert-logo nptel">NPTEL<br>BC</div>
+      <div class="cert-body">
+        <div class="cert-name">Blockchain Architecture Design and Use Cases</div>
+        <div class="cert-org">IIT Kharagpur &amp; IBM &nbsp;·&nbsp; NPTEL</div>
+        <div class="cert-meta">
+          <span><span class="material-icons" style="font-size:13px;">calendar_today</span>Jan – Apr 2019 · 12 Weeks</span>
+          <span><span class="material-icons" style="font-size:13px;">school</span>3 Credits</span>
+          <span><span class="material-icons" style="font-size:13px;">group</span>726 certified</span>
+        </div>
+        <div class="cert-badges">
+          <span class="badge completed">✅ Successfully Completed</span>
+          <span class="badge score">📊 52%</span>
+          <span class="badge fdp">🏫 AICTE FDP</span>
+        </div>
+        <div class="cert-id">Roll: NPTEL19CS26S51241258</div>
+      </div>
+      <div class="cert-actions">
+        <a class="cert-verify"
+           href="https://nptel.ac.in/noc/E_Certificate/NPTEL19CS26S51241258191035703"
+           target="_blank">
+          <span class="material-icons" style="font-size:15px;">verified</span>Verify
+        </a>
+      </div>
+    </div>
+
   </section>
 
 </div><!-- /container -->
