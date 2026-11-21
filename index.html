@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dhyaneswaran Jagadeesan | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <style>
+    /* ===== CSS Variables — Google Material You Palette ===== */
+    :root {
+      --primary:       #1a73e8;
+      --primary-dark:  #1557b0;
+      --primary-light: #e8f0fe;
+      --accent:        #fbbc04;
+      --surface:       #ffffff;
+      --bg:            #f8f9fa;
+      --text-primary:  #202124;
+      --text-secondary:#5f6368;
+      --divider:       #dadce0;
+      --chip-bg:       #e8f0fe;
+      --chip-text:     #1a73e8;
+      --radius:        12px;
+      --shadow-sm:     0 1px 3px rgba(60,64,67,.15), 0 1px 2px rgba(60,64,67,.2);
+      --shadow-md:     0 2px 6px rgba(60,64,67,.15), 0 1px 3px rgba(60,64,67,.2);
+      --shadow-lg:     0 4px 12px rgba(60,64,67,.18), 0 2px 6px rgba(60,64,67,.14);
+    }
+
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ===== Nav Bar ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--divider);
+      box-shadow: var(--shadow-sm);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--text-primary);
+    }
+    .nav-logo span { color: var(--primary); }
+    .nav-links { display: flex; gap: 8px; list-style: none; }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 500;
+      color: var(--text-secondary);
+      padding: 8px 16px; border-radius: 20px;
+      transition: background .2s, color .2s;
+    }
+    .nav-links a:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* ===== Hero ===== */
+    #hero {
+      margin-top: 64px;
+      background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 60%, #1557b0 100%);
+      color: #fff;
+      padding: 80px 32px 100px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    #hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: -60px;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .hero-avatar {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 4px solid rgba(255,255,255,0.6);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 2.8rem; font-weight: 700; color: #fff;
+    }
+    .hero-name {
+      font-family: 'Google Sans', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; margin-bottom: 10px;
+    }
+    .hero-title {
+      font-size: 1.1rem; font-weight: 400;
+      opacity: 0.9; margin-bottom: 20px;
+    }
+    .hero-location {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.9rem; opacity: 0.8;
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 10px; margin-top: 28px;
+    }
+    .hero-badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      padding: 6px 18px; border-radius: 20px;
+      font-size: 0.82rem; font-weight: 500;
+      backdrop-filter: blur(4px);
+    }
+    .hero-contact {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 16px;
+      margin-top: 32px;
+    }
+    .hero-contact a {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: #fff; padding: 10px 22px; border-radius: 24px;
+      font-size: 0.875rem; font-weight: 500;
+      transition: background .2s, transform .2s;
+      backdrop-filter: blur(4px);
+    }
+    .hero-contact a:hover {
+      background: rgba(255,255,255,0.28);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    /* ===== Wavy Divider ===== */
+    .wave {
+      display: block; width: 100%; height: 60px;
+      background: var(--bg);
+      clip-path: ellipse(55% 100% at 50% 100%);
+      margin-top: -1px;
+    }
+
+    /* ===== Page Layout ===== */
+    .container {
+      max-width: 960px; margin: 0 auto;
+      padding: 0 24px;
+    }
+    section { padding: 60px 0; }
+    section + section { border-top: 1px solid var(--divider); }
+
+    /* ===== Section Header ===== */
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 36px;
+    }
+    .section-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--primary-light);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .section-icon .material-icons { color: var(--primary); font-size: 22px; }
+    .section-header h2 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* ===== Cards ===== */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--divider);
+      box-shadow: var(--shadow-sm);
+      padding: 28px 32px;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    /* ===== About ===== */
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .about-text {
+      grid-column: 1 / -1;
+    }
+    .about-text p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .about-text p + p { margin-top: 12px; }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .stat-card {
+      text-align: center;
+      padding: 20px 16px;
+      background: var(--primary-light);
+      border-radius: var(--radius);
+    }
+    .stat-num {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--primary);
+    }
+    .stat-label {
+      font-size: 0.8rem; color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* ===== Timeline (Experience) ===== */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 10px; top: 8px; bottom: 8px;
+      width: 2px; background: var(--divider);
+      border-radius: 2px;
+    }
+    .timeline-item { position: relative; margin-bottom: 32px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute; left: -38px; top: 6px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid var(--surface);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    .timeline-dot.break {
+      background: var(--text-secondary);
+      box-shadow: 0 0 0 2px var(--text-secondary);
+    }
+    .timeline-card {
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius);
+      padding: 22px 26px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .25s, transform .25s;
+    }
+    .timeline-card:hover { box-shadow: var(--shadow-md); transform: translateX(4px); }
+    .timeline-card.break-card {
+      background: #f8f9fa; border-style: dashed;
+    }
+    .tc-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      flex-wrap: wrap; gap: 8px; margin-bottom: 6px;
+    }
+    .tc-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1rem; font-weight: 700; color: var(--text-primary);
+    }
+    .tc-company {
+      font-size: 0.9rem; font-weight: 500; color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .tc-meta {
+      font-size: 0.8rem; color: var(--text-secondary);
+      display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px;
+    }
+    .tc-meta span { display: inline-flex; align-items: center; gap: 4px; }
+    .tc-desc {
+      font-size: 0.875rem; color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .tc-desc ul { padding-left: 18px; margin-top: 6px; }
+    .tc-desc li { margin-bottom: 4px; }
+    .tc-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .chip {
+      background: var(--chip-bg); color: var(--chip-text);
+      font-size: 0.75rem; font-weight: 500;
+      padding: 4px 12px; border-radius: 12px;
+    }
+    .chip.gray { background: #f1f3f4; color: var(--text-secondary); }
+    .chip.green { background: #e6f4ea; color: #137333; }
+    .chip.orange { background: #fef7e0; color: #b05a00; }
+
+    /* ===== Education ===== */
+    .edu-grid { display: grid; gap: 20px; }
+    .edu-card { display: flex; gap: 20px; align-items: flex-start; }
+    .edu-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, #1a73e8, #0d47a1);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.1rem; font-weight: 700; color: #fff;
+    }
+    .edu-body { flex: 1; }
+    .edu-degree {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1rem; font-weight: 700;
+    }
+    .edu-field { font-size: 0.875rem; color: var(--primary); font-weight: 500; }
+    .edu-school { font-size: 0.875rem; color: var(--text-secondary); margin: 2px 0; }
+    .edu-meta { font-size: 0.8rem; color: var(--text-secondary); }
+    .edu-grade {
+      display: inline-block;
+      background: #e6f4ea; color: #137333;
+      font-size: 0.75rem; font-weight: 600;
+      padding: 2px 10px; border-radius: 10px; margin-top: 6px;
+    }
+
+    /* ===== Skills ===== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .skill-item {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .skill-item:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .skill-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--primary); flex-shrink: 0;
+    }
+    .skill-name { font-size: 0.9rem; font-weight: 500; }
+
+    /* ===== Certifications ===== */
+    .cert-card {
+      display: flex; gap: 20px; align-items: center;
+    }
+    .cert-logo {
+      width: 56px; height: 56px; border-radius: 12px;
+      background: linear-gradient(135deg, #f04a2a, #c74634);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.75rem; font-weight: 700; color: #fff;
+      flex-shrink: 0; text-align: center; line-height: 1.2;
+    }
+    .cert-body { flex: 1; }
+    .cert-name {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;
+    }
+    .cert-org { font-size: 0.85rem; color: var(--primary); font-weight: 500; }
+    .cert-date { font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px; }
+    .cert-id {
+      font-size: 0.75rem; color: var(--text-secondary);
+      font-family: monospace; margin-top: 4px;
+    }
+    .cert-verify {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--primary); color: #fff;
+      font-size: 0.8rem; font-weight: 500;
+      padding: 8px 18px; border-radius: 20px;
+      transition: background .2s, transform .2s;
+      white-space: nowrap;
+    }
+    .cert-verify:hover { background: var(--primary-dark); transform: scale(1.03); text-decoration: none; }
+
+    /* ===== Contact ===== */
+    #contact {
+      background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+      color: #fff; border-top: none !important;
+    }
+    #contact .section-header h2 { color: #fff; }
+    #contact .section-icon { background: rgba(255,255,255,0.15); }
+    #contact .section-icon .material-icons { color: #fff; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .contact-item {
+      display: flex; gap: 14px; align-items: center;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      backdrop-filter: blur(8px);
+      transition: background .2s, transform .2s;
+    }
+    .contact-item:hover { background: rgba(255,255,255,0.22); transform: translateY(-2px); }
+    .contact-item .material-icons { color: rgba(255,255,255,0.9); font-size: 24px; }
+    .contact-label { font-size: 0.75rem; opacity: 0.75; margin-bottom: 2px; }
+    .contact-value { font-size: 0.9rem; font-weight: 500; color: #fff; }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 28px 24px;
+      font-size: 0.8rem; color: var(--text-secondary);
+      background: var(--surface);
+      border-top: 1px solid var(--divider);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 640px) {
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      #hero { padding: 60px 20px 80px; }
+      .hero-name { font-size: 1.8rem; }
+      .hero-contact a { padding: 9px 16px; font-size: 0.8rem; }
+      .container { padding: 0 16px; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .edu-card { flex-direction: column; }
+      .cert-card { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<nav>
+  <div class="nav-logo">DJ<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero">
+  <div class="hero-avatar">DJ</div>
+  <div class="hero-name">Dhyaneswaran Jagadeesan</div>
+  <div class="hero-title">Assistant Professor &nbsp;·&nbsp; Ex Retail Sales &nbsp;·&nbsp; IBM Alumni</div>
+  <div class="hero-location">
+    <span class="material-icons" style="font-size:16px;">location_on</span>
+    Coimbatore, Tamil Nadu, India
+  </div>
+  <div class="hero-badges">
+    <span class="hero-badge">🎓 10+ Years Teaching</span>
+    <span class="hero-badge">💻 Oracle AI Certified</span>
+    <span class="hero-badge">🏢 IBM Alumni</span>
+    <span class="hero-badge">🤖 Machine Learning</span>
+    <span class="hero-badge">☕ Core Java</span>
+  </div>
+  <div class="hero-contact">
+    <a href="mailto:dhyaneswaran@gmail.com">
+      <span class="material-icons" style="font-size:18px;">email</span>dhyaneswaran@gmail.com
+    </a>
+    <a href="tel:+919043481758">
+      <span class="material-icons" style="font-size:18px;">phone</span>+91 90434 81758
+    </a>
+    <a href="https://www.linkedin.com/in/dhyaneswaran-jagadeesan-334347276/" target="_blank">
+      <span class="material-icons" style="font-size:18px;">open_in_new</span>LinkedIn Profile
+    </a>
+  </div>
+</section>
+
+<div class="wave"></div>
+
+<!-- ==================== MAIN CONTENT ==================== -->
+<div class="container">
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about">
+    <div class="section-header">
+      <div class="section-icon"><span class="material-icons">person</span></div>
+      <h2>About Me</h2>
+    </div>
+    <div class="card">
+      <p style="color:var(--text-secondary); line-height:1.85; font-size:1rem;">
+        A passionate educator and technology professional with over a decade of experience teaching computer science
+        and information technology at the undergraduate level. I specialize in bridging academic theory with
+        real-world industry practice — from Java and Python programming to Machine Learning, Cryptography, and
+        Cloud technologies.
+      </p>
+      <p style="color:var(--text-secondary); line-height:1.85; font-size:1rem; margin-top:14px;">
+        Prior to academia, I honed my skills as an <strong>Application Support Consultant at IBM</strong>, working in
+        Business Intelligence &amp; Reporting for Marsh &amp; McLennan Companies (UK). This industry foundation
+        informs how I teach and mentor — always grounding concepts in practical relevance.
+      </p>
+      <p style="color:var(--text-secondary); line-height:1.85; font-size:1rem; margin-top:14px;">
+        I am committed to innovative, student-centric pedagogy — developing curriculum for diverse backgrounds
+        (technical, science, and humanities), co-ordinating placement drives, and exploring research frontiers
+        such as blockchain applications in public health governance.
+      </p>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Years of Teaching</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">17</div>
+          <div class="stat-label">Technical Skills</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3+</div>
+          <div class="stat-label">Institutions Served</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERIENCE ===== -->
+  <section id="experience">
+    <div class="section-header">
+      <div class="section-icon"><span class="material-icons">work</span></div>
+      <h2>Experience</h2>
+    </div>
+    <div class="timeline">
+
+      <!-- 1. Dr. MCET (Current) -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tc-top">
+            <div>
+              <div class="tc-title">Assistant Professor</div>
+              <div class="tc-company">Dr. Mahalingam College of Engineering and Technology</div>
+            </div>
+            <span class="chip green">Current</span>
+          </div>
+          <div class="tc-meta">
+            <span><span class="material-icons" style="font-size:14px;">calendar_today</span>Jul 2024 – Present</span>
+            <span><span class="material-icons" style="font-size:14px;">location_on</span>Pollachi, Tamil Nadu</span>
+            <span><span class="material-icons" style="font-size:14px;">apartment</span>Full-time · On-site</span>
+          </div>
+          <div class="tc-desc">
+            Teaching undergraduate students of B.Tech Information Technology on:
+            <ul>
+              <li>Machine Learning with Python</li>
+              <li>JAVA Programming</li>
+              <li>Computer Networks</li>
+              <li>SpringBoot and Micro-services</li>
+            </ul>
+          </div>
+          <div class="tc-skills">
+            <span class="chip">Machine Learning</span>
+            <span class="chip">Core Java</span>
+            <span class="chip">Spring Framework</span>
+            <span class="chip">Data Networks</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Career Break – Retail -->
+      <div class="timeline-item">
+        <div class="timeline-dot break"></div>
+        <div class="timeline-card break-card">
+          <div class="tc-top">
+            <div>
+              <div class="tc-title">Career Break — Retail Operations</div>
+              <div class="tc-company">Medical Store Management (Self-Directed)</div>
+            </div>
+            <span class="chip gray">Career Break</span>
+          </div>
+          <div class="tc-meta">
+            <span><span class="material-icons" style="font-size:14px;">calendar_today</span>Sep 2023 – Jul 2024 · 11 mos</span>
+            <span><span class="material-icons" style="font-size:14px;">location_on</span>Coimbatore, Tamil Nadu</span>
+          </div>
+          <div class="tc-desc">
+            <ul>
+              <li>Streamlined medical store retail processes and provided customer service for prescriptions</li>
+              <li>Handled procurement and payment for medicines from various vendors</li>
+              <li>Mentored 3 employees to improve customer empathy, service quality, and retention</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Karpagam -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tc-top">
+            <div>
+              <div class="tc-title">Assistant Professor</div>
+              <div class="tc-company">Karpagam Academy of Higher Education</div>
+            </div>
+          </div>
+          <div class="tc-meta">
+            <span><span class="material-icons" style="font-size:14px;">calendar_today</span>Mar 2023 – Aug 2023 · 6 mos</span>
+            <span><span class="material-icons" style="font-size:14px;">location_on</span>Coimbatore, Tamil Nadu</span>
+            <span><span class="material-icons" style="font-size:14px;">apartment</span>Full-time · On-site</span>
+          </div>
+          <div class="tc-desc">
+            <ul>
+              <li>Handled Object-Oriented Programming using Python and C Programming courses</li>
+              <li>Co-ordinated placement process for undergraduate engineering programmes (CS & AI)</li>
+              <li>Submitted a research proposal to Tamil Nadu State Council for Science and Technology —
+                on implementing permissioned blockchain in vaccination/immunization governance</li>
+            </ul>
+          </div>
+          <div class="tc-skills">
+            <span class="chip">Python</span>
+            <span class="chip">C Programming</span>
+            <span class="chip">OOP</span>
+            <span class="chip">People Management</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Career Break – Parent / Retail -->
+      <div class="timeline-item">
+        <div class="timeline-dot break"></div>
+        <div class="timeline-card break-card">
+          <div class="tc-top">
+            <div>
+              <div class="tc-title">Career Break — Full-time Parent &amp; Retail Operations</div>
+              <div class="tc-company">Medical Store Management (Self-Directed)</div>
+            </div>
+            <span class="chip gray">Career Break</span>
+          </div>
+          <div class="tc-meta">
+            <span><span class="material-icons" style="font-size:14px;">calendar_today</span>Jan 2021 – Mar 2023 · 2 yrs 3 mos</span>
+            <span><span class="material-icons" style="font-size:14px;">location_on</span>Coimbatore, Tamil Nadu</span>
+          </div>
+          <div class="tc-desc">
+            <ul>
+              <li>Managed medical store operations and customer service for prescriptions</li>
+              <li>Handled procurement, vendor management, and payment processing</li>
+              <li>Mentored staff to improve service quality and customer retention</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. iNurture -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tc-top">
+            <div>
+              <div class="tc-title">Teaching Faculty</div>
+              <div class="tc-company">iNurture Education Solutions Pvt. Ltd.</div>
+            </div>
+          </div>
+          <div class="tc-meta">
+            <span><span class="material-icons" style="font-size:14px;">calendar_today</span>Sep 2020 – Dec 2021 · 1 yr 4 mos</span>
+            <span><span class="material-icons" style="font-size:14px;">location_on</span>Coimbatore, Tamil Nadu</span>
+            <span><span class="material-icons" style="font-size:14px;">apartment</span>Full-time · On-site</span>
+          </div>
+          <div class="tc-desc">
+            Handled courses for undergraduate and postgraduate students:
+            <ul>
+              <li>C Programming, R Programming, Python Programming</li>
+              <li>Linux Administration, Windows Server Administration</li>
+              <li>Social &amp; Web Media Analytics</li>
+            </ul>
+          </div>
+          <div class="tc-skills">
+            <span class="chip">R Language</span>
+            <span class="chip">NLTK</span>
+            <span class="chip">Windows Server</span>
+            <span class="chip">Linux</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Dr. MCET (Earlier) -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tc-top">
+            <div>
+              <div class="tc-title">Assistant Professor</div>
+              <div class="tc-company">Dr. Mahalingam College of Engineering and Technology</div>
+            </div>
+          </div>
+          <div class="tc-meta">
+            <span><span class="material-icons" style="font-size:14px;">calendar_today</span>Jun 2014 – Mar 2020 · 5 yrs 10 mos</span>
+            <span><span class="material-icons" style="font-size:14px;">location_on</span>Pollachi, Tamil Nadu</span>
+            <span><span class="material-icons" style="font-size:14px;">apartment</span>Full-time · On-site</span>
+          </div>
+          <div class="tc-desc">
+            <ul>
+              <li>Courses: Java, Python, Cryptography &amp; Network Security, Linux Shell Programming,
+                J2ME, Theory of Computation — for B.Tech Information Technology students</li>
+              <li>Co-ordinated student-centric Android Application Development activities</li>
+              <li>Conducted Infosys Campus Connect training on Python &amp; Database fundamentals</li>
+              <li>Led syllabus upgradation for JAVA and Python courses to match market trends</li>
+            </ul>
+          </div>
+          <div class="tc-skills">
+            <span class="chip">Core Java</span>
+            <span class="chip">Python</span>
+            <span class="chip">J2ME</span>
+            <span class="chip">Cryptography</span>
+            <span class="chip">Linux/Unix</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. IBM -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tc-top">
+            <div>
+              <div class="tc-title">Application Support Consultant</div>
+              <div class="tc-company">IBM</div>
+            </div>
+            <span class="chip orange">Industry</span>
+          </div>
+          <div class="tc-meta">
+            <span><span class="material-icons" style="font-size:14px;">calendar_today</span>Aug 2011 – Jun 2014 · 2 yrs 11 mos</span>
+            <span><span class="material-icons" style="font-size:14px;">location_on</span>Chennai, Tamil Nadu</span>
+            <span><span class="material-icons" style="font-size:14px;">apartment</span>Full-time · On-site</span>
+          </div>
+          <div class="tc-desc">
+            <ul>
+              <li>Worked in SQL and Oracle PL/SQL technologies</li>
+              <li>Application Support Consultant for Marsh &amp; McLennan Companies, UK (third-party via IBM)</li>
+              <li>Part of the Business Intelligence &amp; Reporting team — created reports and dashboards</li>
+              <li>Collaborated with VMware Engineer to develop ThinApp package; assisted in migration
+                of Reporting Application to Windows 7 environment</li>
+            </ul>
+          </div>
+          <div class="tc-skills">
+            <span class="chip">SQL</span>
+            <span class="chip">PL/SQL</span>
+            <span class="chip">Hyperion Reports</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /timeline -->
+  </section>
+
+  <!-- ===== EDUCATION ===== -->
+  <section id="education">
+    <div class="section-header">
+      <div class="section-icon"><span class="material-icons">school</span></div>
+      <h2>Education</h2>
+    </div>
+    <div class="edu-grid">
+
+      <div class="card edu-card">
+        <div class="edu-icon">MTech</div>
+        <div class="edu-body">
+          <div class="edu-degree">Master of Technology (M.Tech)</div>
+          <div class="edu-field">Computational Engineering &amp; Networking</div>
+          <div class="edu-school">Amrita Vishwa Vidyapeetham, Coimbatore</div>
+          <div class="edu-meta">Jul 2009 – Jul 2011</div>
+          <span class="edu-grade">🏆 First Class</span>
+        </div>
+      </div>
+
+      <div class="card edu-card">
+        <div class="edu-icon">BTech</div>
+        <div class="edu-body">
+          <div class="edu-degree">Bachelor of Technology (B.Tech)</div>
+          <div class="edu-field">Computer Science</div>
+          <div class="edu-school">Amrita Vishwa Vidyapeetham</div>
+          <div class="edu-meta">Jul 2005 – Aug 2009</div>
+          <span class="edu-grade">🏆 First Class</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section id="skills">
+    <div class="section-header">
+      <div class="section-icon"><span class="material-icons">code</span></div>
+      <h2>Technical Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Python Programming</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Core Java</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Machine Learning</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Spring Framework / SpringBoot</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">C Programming Language</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Object-Oriented Programming</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">R Programming Language</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">NLTK (NLP Toolkit)</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">SQL</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Oracle PL/SQL</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">J2ME</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Cryptography</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Linux / Unix</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Windows Server Administration</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Data Networks</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Hyperion Reports</span></div>
+      <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">People Management</span></div>
+    </div>
+  </section>
+
+  <!-- ===== CERTIFICATIONS ===== -->
+  <section id="certifications">
+    <div class="section-header">
+      <div class="section-icon"><span class="material-icons">verified</span></div>
+      <h2>Licenses &amp; Certifications</h2>
+    </div>
+    <div class="card cert-card">
+      <div class="cert-logo">OCI<br>AI</div>
+      <div class="cert-body">
+        <div class="cert-name">Oracle Cloud Infrastructure 2024 Generative AI Professional</div>
+        <div class="cert-org">Oracle</div>
+        <div class="cert-date">Issued: July 2024</div>
+        <div class="cert-id">ID: 225653731OCI2024GAIOCP</div>
+      </div>
+      <a class="cert-verify"
+         href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C042B3844E1B78C6285BA9F2DA9EA2D3A9C0DC2184A63831E4592E8AB3F778F1"
+         target="_blank">
+        <span class="material-icons" style="font-size:16px;">verified</span>Verify
+      </a>
+    </div>
+  </section>
+
+</div><!-- /container -->
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon"><span class="material-icons">contact_mail</span></div>
+      <h2>Get In Touch</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="material-icons">email</span>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">dhyaneswaran@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="material-icons">phone</span>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+91 90434 81758</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="material-icons">location_on</span>
+        <div>
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Coimbatore, Tamil Nadu, India</div>
+        </div>
+      </div>
+      <a class="contact-item" href="https://www.linkedin.com/in/dhyaneswaran-jagadeesan-334347276/" target="_blank"
+         style="text-decoration:none;">
+        <span class="material-icons">open_in_new</span>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">dhyaneswaran-jagadeesan</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <p>© 2024 Dhyaneswaran Jagadeesan &nbsp;·&nbsp; Designed for Google Sites</p>
+</footer>
+
+</body>
+</html>
