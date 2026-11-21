@@ -87,14 +87,13 @@
       background: rgba(255,255,255,0.05);
     }
     .hero-avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid rgba(255, 255, 255, 0.6);
-      object-fit: cover;          
-      object-position: top center; 
-      display: block;
+      width: 120px; height: 120px; border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 4px solid rgba(255,255,255,0.6);
+      display: flex; align-items: center; justify-content: center;
       margin: 0 auto 24px;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 2.8rem; font-weight: 700; color: #fff;
     }
     .hero-name {
       font-family: 'Google Sans', sans-serif;
@@ -408,17 +407,132 @@
       border-top: 1px solid var(--divider);
     }
 
-    /* ===== Responsive ===== */
-    @media (max-width: 640px) {
-      nav { padding: 0 16px; }
-      .nav-links { display: none; }
-      #hero { padding: 60px 20px 80px; }
-      .hero-name { font-size: 1.8rem; }
-      .hero-contact a { padding: 9px 16px; font-size: 0.8rem; }
+    /* ===================================================================
+       RESPONSIVE — Mobile-first, three breakpoints
+       xs  < 480px   (small phones)
+       sm  480–767px (large phones / small tablets)
+       md  768–959px (tablets / small laptops)
+       lg  960px+    (desktop — base styles above)
+    =================================================================== */
+
+    /* ---- Hamburger button (hidden on desktop) ---- */
+    .nav-toggle {
+      display: none;
+      flex-direction: column; justify-content: center; align-items: center;
+      gap: 5px; cursor: pointer; padding: 8px;
+      background: none; border: none; border-radius: 8px;
+      transition: background .2s;
+    }
+    .nav-toggle:hover { background: var(--primary-light); }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text-primary); border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+    /* Animated X when open */
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ---- Mobile nav drawer ---- */
+    @media (max-width: 767px) {
+      nav { padding: 0 16px; height: 56px; }
+      .nav-toggle { display: flex; }
+
+      .nav-links {
+        display: flex; flex-direction: column; gap: 4px;
+        position: fixed; top: 56px; left: 0; right: 0;
+        background: var(--surface);
+        border-bottom: 1px solid var(--divider);
+        box-shadow: var(--shadow-md);
+        padding: 12px 16px 16px;
+        transform: translateY(-110%);
+        transition: transform .3s ease;
+        z-index: 99;
+      }
+      .nav-links.open { transform: translateY(0); }
+      .nav-links a {
+        padding: 12px 16px; border-radius: 8px;
+        font-size: 0.95rem;
+        display: block;
+      }
+
+      /* Hero */
+      #hero { margin-top: 56px; padding: 48px 20px 70px; }
+      .hero-name { font-size: clamp(1.5rem, 6vw, 2rem); }
+      .hero-title { font-size: 0.95rem; }
+      .hero-badges { gap: 8px; margin-top: 20px; }
+      .hero-badge { font-size: 0.78rem; padding: 5px 14px; }
+      .hero-contact { gap: 10px; margin-top: 24px; }
+      .hero-contact a { padding: 10px 16px; font-size: 0.82rem; gap: 6px; }
+
+      /* Container */
       .container { padding: 0 16px; }
+      section { padding: 44px 0; }
+
+      /* Cards */
+      .card { padding: 20px 18px; }
+
+      /* Stat grid  → 2 columns on phones */
       .stat-grid { grid-template-columns: 1fr 1fr; }
-      .edu-card { flex-direction: column; }
-      .cert-card { flex-direction: column; align-items: flex-start; }
+
+      /* Timeline: tighten on mobile */
+      .timeline { padding-left: 24px; }
+      .timeline::before { left: 7px; }
+      .timeline-dot { left: -29px; width: 14px; height: 14px; }
+      .timeline-card { padding: 16px 14px; }
+      .tc-meta { gap: 8px; flex-direction: column; }
+      .tc-skills { gap: 5px; }
+
+      /* Education → stack vertically */
+      .edu-card { flex-direction: column; gap: 12px; }
+
+      /* Skills → 1 column */
+      .skills-grid { grid-template-columns: 1fr; }
+
+      /* Cert card → stack */
+      .cert-card { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .cert-verify { width: 100%; justify-content: center; }
+
+      /* Contact grid → 1 column */
+      .contact-grid { grid-template-columns: 1fr; gap: 12px; }
+    }
+
+    /* ---- Small phones (< 480px) ---- */
+    @media (max-width: 479px) {
+      .hero-avatar { width: 90px; height: 90px; font-size: 2rem; }
+      .hero-name { font-size: 1.4rem; }
+      .hero-title { font-size: 0.88rem; }
+      .hero-contact { flex-direction: column; align-items: center; }
+      .hero-contact a { width: 100%; max-width: 280px; justify-content: center; }
+      .stat-grid { grid-template-columns: 1fr; }
+      .stat-num { font-size: 1.6rem; }
+      .section-header h2 { font-size: 1.25rem; }
+      .tc-title { font-size: 0.95rem; }
+      .edu-icon { width: 44px; height: 44px; font-size: 0.85rem; }
+      .cert-logo { width: 46px; height: 46px; font-size: 0.7rem; }
+    }
+
+    /* ---- Tablet (768px – 959px) ---- */
+    @media (min-width: 768px) and (max-width: 959px) {
+      .container { padding: 0 32px; }
+      .hero-name { font-size: 2.2rem; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-grid { grid-template-columns: repeat(3, 1fr); }
+      .tc-meta { flex-wrap: wrap; }
+    }
+
+    /* ---- Touch device: remove hover transforms that feel wrong ---- */
+    @media (hover: none) {
+      .card:hover, .skill-item:hover, .timeline-card:hover,
+      .contact-item:hover, .hero-contact a:hover { transform: none; }
+    }
+
+    /* ---- Reduced motion ---- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
@@ -426,8 +540,11 @@
 
 <!-- ==================== NAV ==================== -->
 <nav>
-  <div class="nav-logo"><bold>JD</bold><span>.</span></div>
-  <ul class="nav-links">
+  <div class="nav-logo">DJ<span>.</span></div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#education">Education</a></li>
@@ -439,7 +556,7 @@
 
 <!-- ==================== HERO ==================== -->
 <section id="hero">
-  <div><img src="Dhyaneswaran_J.jpg" alt="JD" class="hero-avatar" /></div>
+  <div class="hero-avatar">DJ</div>
   <div class="hero-name">Dhyaneswaran Jagadeesan</div>
   <div class="hero-title">Assistant Professor &nbsp;·&nbsp; Ex Retail Sales &nbsp;·&nbsp; IBM Alumni</div>
   <div class="hero-location">
@@ -864,8 +981,60 @@
 
 <!-- ==================== FOOTER ==================== -->
 <footer>
-  <p>© 2026 Dhyaneswaran Jagadeesan &nbsp;·&nbsp; Designed for Google Sites</p>
+  <p>© 2024 Dhyaneswaran Jagadeesan &nbsp;·&nbsp; Designed for Google Sites</p>
 </footer>
+
+<script>
+  /* ===== Hamburger menu toggle ===== */
+  const toggle   = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  toggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  /* Close drawer when a nav link is clicked */
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', false);
+    });
+  });
+
+  /* Close drawer on outside click */
+  document.addEventListener('click', e => {
+    if (!toggle.contains(e.target) && !navLinks.contains(e.target)) {
+      navLinks.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', false);
+    }
+  });
+
+  /* ===== Active nav link on scroll ===== */
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = navLinks.querySelectorAll('a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAnchors.forEach(a => {
+          a.style.background = '';
+          a.style.color = '';
+        });
+        const active = navLinks.querySelector(`a[href="#${entry.target.id}"]`);
+        if (active) {
+          active.style.background = 'var(--primary-light)';
+          active.style.color = 'var(--primary)';
+        }
+      }
+    });
+  }, { rootMargin: '-50% 0px -50% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
 
 </body>
 </html>
